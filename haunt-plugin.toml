@@ -1,0 +1,18 @@
+[plugin]
+id = "dev.haunt.relay"
+name = "Relay"
+description = "Pack an agent's finished turn into a handoff brief for another agent"
+version = "0.1.0"
+api = "0.5"
+entry = "target/wasm32-wasip2/release/haunt_plugin.wasm"
+license = "MIT"
+
+[capabilities]
+# Copies the brief you pick; Haunt allows it only right after you choose a row.
+clipboard = "write"
+# The goal, plan and file paths in the brief.
+event_details = true
+events = ["agent.session-start", "agent.prompt", "agent.task", "agent.file-edited", "agent.plan-exit"]
+
+[settings]
+unverified = { type = "bool", default = false, description = "Also use events without the tab's nonce, which anything in the terminal can forge" }
